@@ -136,3 +136,24 @@ Each bureau defines its own single-character code for "this month, no rating was
 | TransUnion | `["X"]` | "no data received from a subscriber for the month or when a trade account is in dispute" (also hold / unrated) | TU4.0 User Guide, p. 840 |
 
 The codes are different because each bureau's payment-pattern format is different (Equifax retains `*` in the string via NaN-fill; Experian strips `-` via `placeholder`; TransUnion NaN-fills with `""` and keeps `X` as a literal character). The unifying rule across all three is the same: any single-character code that appears in the payment pattern but is not declared in any rate-value bucket of the asset's `rate` config is a missing-data code and should be excluded from the denominator.
+
+## Additional change: `_get_count` now escapes its values before passing to `pandas.Series.str.count`
+
+The new `_construct_trended_features` path calls `_get_effective_month_range(..., all_month_range=False)`, which in turn calls `_get_count(trimmed, missing_data_chars)`. The existing implementation passed `values[0]` (or `'|'.join(values)`) straight into `trimmed.str.count(...)`, and `pandas.Series.str.count` always interprets `pat` as a regular expression (the underlying call is `re.compile(pat)`).
+
+That was harmless when `_get_count` was only ever called with rate codes like `'0'`, `'1'`, `'2'`, ... (none of which are regex metacharacters), but the moment Equifax's `missing_data_chars=['*']` flows through, `re.compile('*')` raises `re.error: nothing to repeat at position 0` because `*` is a quantifier with no preceding atom. Experian (`'-'`) and TransUnion (`'X'`) happened to be literal-safe; only Equifax tripped the bug.
+
+The fix runs every value through `re.escape` so it's matched literally, not interpreted:
+
+```python
+import re
+
+def _get_count(self, trimmed, values):
+    if len(values) == 1:
+        return trimmed.str.count(re.escape(values[0]))
+    else:
+        pattern = "|".join(re.escape(v) for v in values)
+        return trimmed.str.count(pattern)
+```
+
+`re.escape('0')` returns `'0'`, so the alphanumeric rate codes that already worked still work, and any punctuation that future `missing_data_chars` configs might use (`*`, `+`, `?`, `.`, `(`, etc.) is automatically literal-safe too.

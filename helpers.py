@@ -125,9 +125,17 @@ def get_aggregator_params(asset_or_bureau):
     """Pull the PaymentPatternsAggregatorV2 params block out of an asset.
 
     Accepts either a bureau name (str) or an already-loaded asset dict.
-    Strips `missing_data_chars` from the payment_patterns config so the params
-    are usable with either the upstream PaymentPatternsAggregatorV2 (which
-    doesn't know about that key) or the modified build (which does).
+    Returns a shallow copy of the asset's `params` dict for the
+    PaymentPatternsAggregatorV2 step, ready to splat into the modified
+    constructor:
+
+        PaymentPatternsAggregatorV2(**get_aggregator_params(asset))
+
+    The asset's `params` carries `missing_data_chars` at the top level
+    (alongside `report_date` and `payment_patterns`) -- the same shape the
+    modified `__init__(self, payment_patterns, missing_data_chars,
+    report_date=None, ...)` expects. The shallow copy guards against the
+    caller mutating the cached asset.
     """
     if isinstance(asset_or_bureau, str):
         asset = load_asset_json(asset_or_bureau)
@@ -138,9 +146,7 @@ def get_aggregator_params(asset_or_bureau):
         s['params'] for s in asset.get('preprocess', [])
         if s.get('type') == 'PaymentPatternsAggregatorV2'
     )
-    pp = dict(params['payment_patterns'])
-    pp.pop('missing_data_chars', None)
-    return dict(params, payment_patterns=pp)
+    return dict(params)
 
 
 def get_relevant_mapping_steps(asset_or_bureau, needed_cols):
