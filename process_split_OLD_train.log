@@ -1,0 +1,6 @@
+(logging to /home/jag/payment-processor-research/process_split_OLD_train.log)
+
+##### SPLIT = train #####
+
+=== equifax/train ===
+[equifax/train]  phase 1: map + preprocess (582 chunks) -> /home/jag/payment-processor-research/payment_processing_research_data/equifax/train/normalized
