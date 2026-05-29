@@ -3,4 +3,5 @@
 ##### SPLIT = train #####
 
 === equifax/train ===
-[equifax/train]  phase 1: map + preprocess (582 chunks) -> /home/jag/payment-processor-research/payment_processing_research_data/equifax/train/normalized
+[equifax/train]  phase 1: map + preprocess (582 chunks) -> /home/jag/payment-processor-research/payment_processing_research_data/equifax/train/normalized_new
+  saved 1/582 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/equifax/train/normalized_new/part-00000.parquet

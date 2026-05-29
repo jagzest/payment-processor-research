@@ -141,7 +141,13 @@ DATA_DIR = _os.path.join(
     'payment_processing_research_data',
 )
 
-VALID_STAGES = ('unmapped', 'mapped', 'normalized', 'processed', 'prepped')
+VALID_STAGES = (
+    'unmapped', 'mapped',
+    'normalized', 'processed',           # legacy / shared
+    'normalized_new', 'normalized_old',  # PrepareDataNewMethod / OldMethod
+    'processed_new',  'processed_old',
+    'prepped',
+)
 
 
 def stage_dir(bureau_cfg, split, stage):
@@ -164,6 +170,28 @@ def normalized_dir(bureau_cfg, split):
 
 def processed_dir(bureau_cfg, split):
     return stage_dir(bureau_cfg, split, 'processed')
+
+
+# --- per-method new/old splits used by PrepareDataNewMethod / OldMethod ---
+# The two notebooks run the same pipeline against different aggregator
+# implementations (new vs upstream PaymentPatternsAggregatorV2). They write
+# to SEPARATE directories so they can coexist on disk and so neither run
+# overwrites the other -- you can diff their processed outputs directly.
+
+def normalized_dir_new(bureau_cfg, split):
+    return stage_dir(bureau_cfg, split, 'normalized_new')
+
+
+def normalized_dir_old(bureau_cfg, split):
+    return stage_dir(bureau_cfg, split, 'normalized_old')
+
+
+def processed_dir_new(bureau_cfg, split):
+    return stage_dir(bureau_cfg, split, 'processed_new')
+
+
+def processed_dir_old(bureau_cfg, split):
+    return stage_dir(bureau_cfg, split, 'processed_old')
 
 
 def prepped_dir(bureau_cfg, split):
