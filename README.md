@@ -2,9 +2,17 @@
 
 Research project on the `PaymentPatternsAggregatorV2` trended-feature
 denominator: the `percent_<rate>_<window>_months` features divide by months
-that were never observed, biasing the rates toward 0. We built the fix, ran a
-NEW-vs-OLD modeling experiment, and along the way found a second (untested)
-issue with the Experian placeholder.
+that were never observed, biasing the rates toward 0. We built the fix
+(`missing_data_chars`) and ran the full NEW-vs-OLD modeling experiment on it
+as described in "How the experiment ran, step by step" below.
+
+After constructing real-world examples (`RealDataExample.ipynb`) we found a
+second issue: Experian's `placeholder: "-"` was deleting real months from the
+history. We removed the placeholder for experian (and TU's dead `/`), but
+**this change is NOT in the experiment** — it only appears in
+`RealDataExample.ipynb`. Note it also moves more than the percent features:
+with the dashes no longer removed for experian, window membership shifts, so
+the `number_<rate>_<window>_months` count features should change too.
 
 The changes are committed on the **`payment_processor_change`** branch of both
 repos (model-engine `d747ffb8`, feature-engine-parts `32ca0541`).
