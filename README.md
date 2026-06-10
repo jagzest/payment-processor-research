@@ -1,19 +1,13 @@
 # payment-processor-research
 
-The changes are committed on the **`payment_processor_change`** branch of both
-repos (model-engine `d747ffb8`, feature-engine-parts `32ca0541`):
-
-- [equifax change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/equifax/cms_6/fe2/trade.json#L285-L315)
-- [experian change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/experian/arf7/fe2/trade.json#L374-L398)
-- [transunion/TU4R change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/transunion/TU4R/fe2/trade.json#L435-L459)
-- [feature-engine-parts change](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py)
-  (`payment_pattern_aggregator.py` — see the linked walkthrough below)
-
 Research project on the `PaymentPatternsAggregatorV2` trended-feature
 denominator: the `percent_<rate>_<window>_months` features divide by months
 that were never observed, biasing the rates toward 0. We built the fix, ran a
 NEW-vs-OLD modeling experiment, and along the way found a second (untested)
 issue with the Experian placeholder.
+
+The changes are committed on the **`payment_processor_change`** branch of both
+repos (model-engine `d747ffb8`, feature-engine-parts `32ca0541`).
 
 ## Where to look
 
@@ -26,48 +20,65 @@ issue with the Experian placeholder.
 
 ## The changes, in brief
 
-- **`missing_data_chars` added per bureau asset** — the bureau's "no rating
-  observed this month" code, excluded from the percent denominators:
-  Equifax `*` (TotalView Guide p. 3-30), Experian `-` (CIS Guide Appendix T,
-  Segment 357.B4.5, p. 139), TransUnion `X` (TU4.1 Guide Appendix C,
-  pp. 839-840).
-- **feature-engine-parts** (`payment_pattern_aggregator.py`, commit `32ca0541`):
-  - We added `missing_data_chars` — see the
-    [param docstring](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L39-L43):
-    bureau-specific codes for months with no observed rating (`*` EFX, `-`
-    EXP, `X` TU), excluded from the effective month range. It replaces the
-    old `exclude_trailing`, which was hardcoded to `["*"]`; now the asset
-    declares it per bureau.
-  - [`_get_effective_month_range` gained an `all_month_range` flag](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L175),
-    because the two callers need different semantics for "missing":
-    - `True` subtracts only the **trailing run** of missing-data chars (via
-      `_count_trailing_matches`). Trailing codes are the bureau padding the
-      fixed-width field for months **before the account opened**, so they're
-      not part of the account's life — but a mid-string gap is a month the
-      account existed (the bureau just got no update), and a reporting gap
-      doesn't make the account younger. This is the duration semantic.
-    - `False` subtracts **every occurrence anywhere** in the window (via
-      `_get_count`). For an observation count, position is irrelevant — an
-      unobserved month is unobserved whether it sits mid-window or at the
-      end, and leaving it in the denominator would silently count it as an
-      observed paid-as-agreed month.
-  - [`payment_history_length` calls it with the default `True`](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L248-L251)
-    — it's a duration ("months the account has existed"), so only the
-    pre-account-open padding comes off — while the
-    [trended-features call passes `all_month_range=False`](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L211-L216)
-    — `percent_<rate>` denominators are observation counts.
-  - That same trended call passes `month_range=trimmed.str.len()` instead of
-    the nominal window: Experian and TransUnion produce pattern strings
-    **shorter** than the window for sparse histories, so the old
-    `month_range - count('#')` counted string positions that don't exist.
-    Anchoring on the observed string length keeps the denominator honest.
-  - `_get_count` wraps values in `re.escape` — `Series.str.count` compiles
-    its pattern as a regex, and Equifax's `*` is a bare quantifier
-    (`re.error: nothing to repeat`).
-- **Placeholder removal (RECENTLY FOUND — see below)** — `placeholder: "-"`
-  removed from the Experian asset and the dead `placeholder: "/"` from
-  TransUnion. Only demonstrated in `RealDataExample.ipynb`; NOT covered by
-  the modeling experiment.
+### model-engine changes
+
+For each equifax/cms_6, experian/arf7 and transunion/TU4R we added
+`missing_data_chars` (the bureau's "no rating observed this month" code —
+`*`, `-`, `X`) and a `notes` field citing the bureau spec, and for experian
+and transunion we removed the `placeholder` so `-` and `/` are no longer
+stripped from the payment pattern. See:
+
+- [equifax change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/equifax/cms_6/fe2/trade.json#L285-L315)
+- [experian change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/experian/arf7/fe2/trade.json#L374-L398)
+- [transunion/TU4R change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/transunion/TU4R/fe2/trade.json#L435-L459)
+
+### feature-engine-parts changes
+
+All in [`payment_pattern_aggregator.py`](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py):
+
+- We adjusted payment-processor (`PaymentPatternsAggregatorV2`) so that it
+  reads `missing_data_chars` from the asset. See
+  [here](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L62).
+  This is a required input, so every asset that uses
+  `PaymentPatternsAggregatorV2` must declare it (pass `[]` to disable the
+  exclusion).
+- We updated `_get_effective_month_range` so that it takes in
+  `missing_data_chars` and a variable called `all_month_range`. If
+  `all_month_range` is True it only excludes months where the missing data
+  character is trailing. Else it will exclude all months with a missing data
+  character from the month range. See
+  [here](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L184-L189).
+- The `percent_<rate>` denominators call `_get_effective_month_range` with
+  `all_month_range=False` because these denominators count observed months —
+  a month with a missing-data character was not observed no matter where it
+  sits in the window, and leaving it in would count it as an observed
+  paid-as-agreed month, biasing the rate toward 0. We also set the
+  `month_range` for this call to the length of the payment-pattern string
+  because Experian and TransUnion produce strings shorter than the nominal
+  window for sparse histories, so subtracting from the nominal window would
+  count positions that don't exist. See
+  [here](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L211-L216).
+  - Note, we also updated `_get_count` to wrap its values in `re.escape`,
+    since `Series.str.count` compiles the pattern as a regex and Equifax's
+    `*` would raise `re.error: nothing to repeat`. See
+    [here](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L169-L170).
+- However for the `ppt_len_name` (`payment_history_length`), our call of
+  `_get_effective_month_range` leaves `all_month_range=True` because that
+  feature measures the entire history the account existed: only the trailing
+  run of missing-data characters is time before the account opened, while a
+  mid-string gap is still a month the account was alive (the bureau just got
+  no update), so it stays in the count. See
+  [here](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L248-L249).
+
+## Known gaps / follow-ups
+
+- `payment_history_length` quietly changes for Experian/TU: trailing `-`/`X`
+  now subtract (was hardcoded to `*` only).
+- `missing_data_chars` is a required constructor param — other assets that
+  use `PaymentPatternsAggregatorV2` (authorized.json, FE1→FE2 conversion
+  variants) must declare it or the param needs a default.
+- TU trended (TruVision) patterns would need `Y` (reporting gap) added
+  alongside `X`.
 
 ## How the experiment ran, step by step
 
