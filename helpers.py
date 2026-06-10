@@ -30,11 +30,11 @@ Module layout:
 import os
 from pathlib import Path
 
-from cryptography.hazmat.backends import default_backend
-from cryptography.hazmat.primitives import serialization
-
 import pandas as pd
-import snowflake.connector
+
+# snowflake-connector + cryptography are only needed by get_conn(); they are
+# imported lazily there so analysis notebooks that never touch Snowflake
+# (e.g. RealDataExample.ipynb) can run in envs without them.
 
 
 # =============================================================================
@@ -192,6 +192,10 @@ def get_conn(schema,
     sample_truist_preprocessed.ipynb and feature-engine-worker's ServiceConfig.
     Derives the username from $USER@zest.ai.
     """
+    from cryptography.hazmat.backends import default_backend
+    from cryptography.hazmat.primitives import serialization
+    import snowflake.connector
+
     user = f"{os.environ['USER']}@zest.ai"
     with open(os.path.expanduser(key_path), 'rb') as f:
         p_key = serialization.load_pem_private_key(
