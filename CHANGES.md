@@ -59,12 +59,48 @@ Each bureau's `PaymentPatternsAggregatorV2` block now declares its
 
 | File | Value | Spec meaning |
 |---|---|---|
-| `assets/equifax/cms_6/fe2/trade.json` | `["*"]` | rate/status not available that month (EFX STS TotalView Guide, p. 3-30) |
-| `assets/experian/arf7/fe2/trade.json` | `["-"]` | no history reported (EXP CIS Cross Reference Guide, p. 49) |
-| `assets/transunion/TU4R/fe2/trade.json` | `["X"]` | no data received / account in dispute (TU4.0 User Guide, p. 840) |
+| `assets/equifax/cms_6/fe2/trade.json` | `["*"]` | rate/status not available that month (EFX STS TotalView Programming Guide, p. 3-30) |
+| `assets/experian/arf7/fe2/trade.json` | `["-"]` | "No update received" (EXP CIS Cross Reference Guide, Appendix T "Payment Profile Indicators", Segment 357.B4.5, p. 139) |
+| `assets/transunion/TU4R/fe2/trade.json` | `["X"]` | no data received from the subscriber / account in dispute (TU4.1 User Guide, Appendix C, pp. 839–840) |
 
-For Experian the `-` chars are already stripped by `placeholder` before the
-aggregator runs, so the declared value is effectively documentation — the
-denominator correction for Experian comes entirely from the
-`trimmed.str.len()` anchoring in feature-engine-parts.
+## model-engine: `placeholder` removed from the Experian and TransUnion assets
+
+`placeholder` is an asset-driven input: the aggregator reads it from the asset
+(`payment_pattern_aggregator.py:76`) and `_remove_placeholder` (line 142)
+deletes every occurrence from the combined pattern string — before trimming
+and before the `#` fillers are added. It exists for Equifax, whose patterns
+contain a `/` separator after every 12 months of history; that is pure
+formatting, not a month, so stripping it is correct and Equifax keeps its
+placeholder.
+
+The other two bureaus had placeholders they shouldn't:
+
+- **Experian had `"placeholder": "-"` — removed.** Per Appendix T the dash is
+  a real month whose status is "No update received", not formatting. Deleting
+  it shifted every older month one position more recent, which (a) put months
+  into lookback windows they don't belong in, (b) corrupted the
+  `months_since_most_recent_<rate>` features (string position = months ago),
+  and (c) shortened the string, masking how much history was actually
+  observed. About 18% of Experian test tradelines carry at least one dash.
+  With the placeholder gone, the dash stays at its true calendar position and
+  the `missing_data_chars: ["-"]` declaration becomes load-bearing: the new
+  denominator code subtracts it from the percent features, and the numerators
+  ignore it since `-` is in no rate bucket.
+
+- **TransUnion had `"placeholder": "/"` — removed.** The TU4.1 User Guide's
+  payment pattern character set (`1`–`5`, `E`, `X`, `J`, `K`, `H`, `G`, `L`,
+  `Y`; Appendix C, pp. 838–840) contains no `/`, and a scan of 100k real TU
+  tradelines found none either. The entry was copied from the Equifax asset
+  and never did anything; removing it is a no-op that stops the asset from
+  claiming TU has a separator it doesn't have. The guide also defines `Y` =
+  "Represents a gap in monthly payment reporting" (p. 840) for *trended*
+  patterns — our pulls use the standard pattern (gaps appear as `X`), but if
+  TruVision trended patterns are ever used, `Y` belongs in
+  `missing_data_chars` alongside `X`.
+
+Note the Experian removal widens the change beyond the percent denominators:
+window membership and `months_since_*` values shift for any tradeline with a
+mid-string dash, so the earlier "no model impact" experiment (which ran with
+the dash still being stripped) does not cover this part and would need a
+re-run to confirm impact on the realigned features.
 
