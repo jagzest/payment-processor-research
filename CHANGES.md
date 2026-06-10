@@ -68,24 +68,3 @@ aggregator runs, so the declared value is effectively documentation — the
 denominator correction for Experian comes entirely from the
 `trimmed.str.len()` anchoring in feature-engine-parts.
 
-## Verification
-
-- All three asset files parse as valid JSON.
-- The edited module compiles, and the README walkthrough example reproduces:
-  `#121**` / `#12111` give effective ranges `[3, 5]` and `percent_DQ30+`
-  `[0.333, 0.2]`; the legacy trailing-only path and the `re.escape` fix for
-  counting `*` both behave as expected (run in the `newest_model_engine` env).
-- Impact on modeling was tested separately (see
-  `payment-processor-research/README.md` and the denominator analysis
-  notebook): only ~6% of tradelines change denominator, and NEW-vs-OLD models
-  showed no AUC / econ / calibration difference. This change is about
-  correctness and defensibility of the feature definitions, not lift.
-
-## Open items before a PR
-
-- `missing_data_chars` is a required constructor arg with no default, so every
-  other asset that instantiates `PaymentPatternsAggregatorV2` (authorized.json
-  variants, FE1→FE2 conversion assets, other bureau formats) must either
-  declare it or the param needs a default.
-- Only the three FE2 `trade.json` assets are updated here; the corresponding
-  `authorized.json` and conversion variants still need the same param.
