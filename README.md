@@ -15,18 +15,30 @@ repos (model-engine `d747ffb8`, feature-engine-parts `32ca0541`).
 - `RESULTS_SUMMARY.md` — experiment verdict and where the data came from
 - `RealDataExample.ipynb` — real-data examples, and the **ONLY place the
   placeholder change is shown**
-- `~/feature-engine-parts-master/` and `~/model-engine-master/` — the clean
-  master clones carrying the changes
+- The changes live on the `payment_processor_change` branch of each repo:
+  [model-engine](https://github.com/Katlean/model-engine/tree/payment_processor_change)
+  (commit `d747ffb8`) and
+  [feature-engine-parts](https://github.com/Katlean/feature-engine-parts/tree/payment_processor_change)
+  (commit `32ca0541`)
 
 ## The changes, in brief
 
 ### model-engine changes
 
 For each equifax/cms_6, experian/arf7 and transunion/TU4R we added
-`missing_data_chars` (the bureau's "no rating observed this month" code —
-`*`, `-`, `X`) and a `notes` field citing the bureau spec, and for experian
-and transunion we removed the `placeholder` so `-` and `/` are no longer
-stripped from the payment pattern. See:
+`missing_data_chars` (the bureau's "no rating observed this month" code) and
+a `notes` field citing the bureau spec: `*` for equifax ("Rate/Status was not
+available for that month" — STS TotalView Programming Guide, p. 3-30), `-`
+for experian ("No update received" — CIS Cross Reference Guide, Appendix T
+"Payment Profile Indicators", Segment 357.B4.5, p. 139), and `X` for
+transunion ("no data received from a subscriber for the month or when a
+trade account is in dispute" — TU4.1 User Guide, Appendix C, pp. 839-840).
+For experian and transunion we also removed the `placeholder` so `-` and `/`
+are no longer stripped from the payment pattern: per Appendix T experian's
+`-` is a real month (not formatting), so deleting it misaligned the history,
+and per Appendix C the TU pattern character set (`1-5, E, X, J, K, H, G, L,
+Y`; pp. 838-840) contains no `/` at all — it was copied from the equifax
+asset and never occurs in TU data. See:
 
 - [equifax change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/equifax/cms_6/fe2/trade.json#L285-L315)
 - [experian change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/experian/arf7/fe2/trade.json#L374-L398)
