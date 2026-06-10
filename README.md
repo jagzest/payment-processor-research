@@ -26,23 +26,29 @@ repos (model-engine `d747ffb8`, feature-engine-parts `32ca0541`).
 ### model-engine changes
 
 For each equifax/cms_6, experian/arf7 and transunion/TU4R we added
-`missing_data_chars` (the bureau's "no rating observed this month" code) and
-a `notes` field citing the bureau spec: `*` for equifax ("Rate/Status was not
-available for that month" — STS TotalView Programming Guide, p. 3-30), `-`
-for experian ("No update received" — CIS Cross Reference Guide, Appendix T
-"Payment Profile Indicators", Segment 357.B4.5, p. 139), and `X` for
-transunion ("no data received from a subscriber for the month or when a
-trade account is in dispute" — TU4.1 User Guide, Appendix C, pp. 839-840).
-For experian and transunion we also removed the `placeholder` so `-` and `/`
-are no longer stripped from the payment pattern: per Appendix T experian's
-`-` is a real month (not formatting), so deleting it misaligned the history,
-and per Appendix C the TU pattern character set (`1-5, E, X, J, K, H, G, L,
-Y`; pp. 838-840) contains no `/` at all — it was copied from the equifax
-asset and never occurs in TU data. See:
+`missing_data_chars` (the bureau's "no rating observed this month" code) with
+a `notes` field citing the bureau spec, and for experian and transunion we
+removed the `placeholder`:
 
-- [equifax change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/equifax/cms_6/fe2/trade.json#L285-L315)
-- [experian change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/experian/arf7/fe2/trade.json#L374-L398)
-- [transunion/TU4R change](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/transunion/TU4R/fe2/trade.json#L435-L459)
+- [equifax](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/equifax/cms_6/fe2/trade.json#L285-L315)
+  `["*"]` — "Rate/Status was not available for that month"
+  (STS TotalView Programming Guide, p. 3-30)
+- [experian](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/experian/arf7/fe2/trade.json#L374-L398)
+  `["-"]` — "No update received" (CIS Cross Reference Guide,
+  Appendix T "Payment Profile Indicators", Segment 357.B4.5, p. 139)
+- [transunion/TU4R](https://github.com/Katlean/model-engine/blob/d747ffb81cb16ea7e80989c091b5d75d013eada9/model_engine/assets/transunion/TU4R/fe2/trade.json#L435-L459)
+  `["X"]` — "no data received from a subscriber for the month or
+  when a trade account is in dispute" (TU4.1 User Guide, Appendix C,
+  pp. 839-840)
+- placeholder removed for experian — per Appendix T the `-` is a real month,
+  not formatting, so stripping it misaligned the history
+- placeholder removed for transunion — the TU pattern character set
+  (`1-5, E, X, J, K, H, G, L, Y`; Appendix C, pp. 838-840) contains no `/`;
+  it was copied from the equifax asset and never occurs in TU data
+- note: this will always change `payment_history_length` for experian/TU —
+  its trailing-only exclusion now uses the bureau's chars (`-`/`X`) instead
+  of the hardcoded `*`, so trailing unobserved months no longer count as
+  history
 
 ### feature-engine-parts changes
 
