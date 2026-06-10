@@ -1,0 +1,558 @@
+(logging to /home/jag/payment-processor-research/process_transunion_test_OLD.log)
+
+##### transunion/test / OLD #####
+clearing normalized + processed dirs first (idempotent)
+  rm /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/*
+  rm /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/*
+
+phase 1: map + preprocess (445 chunks) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old
+  saved 1/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00000.parquet
+  saved 2/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00001.parquet
+  saved 3/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00002.parquet
+  saved 4/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00003.parquet
+  saved 5/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00004.parquet
+  saved 6/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00005.parquet
+  saved 7/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00006.parquet
+  saved 8/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00007.parquet
+  saved 9/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00008.parquet
+  saved 10/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00009.parquet
+  saved 11/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00010.parquet
+  saved 12/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00011.parquet
+  saved 13/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00012.parquet
+  saved 14/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00013.parquet
+  saved 15/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00014.parquet
+  saved 16/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00015.parquet
+  saved 17/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00016.parquet
+  saved 18/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00017.parquet
+  saved 19/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00018.parquet
+  saved 20/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00019.parquet
+  saved 21/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00020.parquet
+  saved 22/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00021.parquet
+  saved 23/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00022.parquet
+  saved 24/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00023.parquet
+  saved 25/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00024.parquet
+  saved 26/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00025.parquet
+  saved 27/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00026.parquet
+  saved 28/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00027.parquet
+  saved 29/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00028.parquet
+  saved 30/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00029.parquet
+  saved 31/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00030.parquet
+  saved 32/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00031.parquet
+  saved 33/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00032.parquet
+  saved 34/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00033.parquet
+  saved 35/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00034.parquet
+  saved 36/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00035.parquet
+  saved 37/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00036.parquet
+  saved 38/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00037.parquet
+  saved 39/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00038.parquet
+  saved 40/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00039.parquet
+  saved 41/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00040.parquet
+  saved 42/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00041.parquet
+  saved 43/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00042.parquet
+  saved 44/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00043.parquet
+  saved 45/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00044.parquet
+  saved 46/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00045.parquet
+  saved 47/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00046.parquet
+  saved 48/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00047.parquet
+  saved 49/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00048.parquet
+  saved 50/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00049.parquet
+  saved 51/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00050.parquet
+  saved 52/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00051.parquet
+  saved 53/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00052.parquet
+  saved 54/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00053.parquet
+  saved 55/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00054.parquet
+  saved 56/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00055.parquet
+  saved 57/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00056.parquet
+  saved 58/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00057.parquet
+  saved 59/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00058.parquet
+  saved 60/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00059.parquet
+  saved 61/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00060.parquet
+  saved 62/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00061.parquet
+  saved 63/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00062.parquet
+  saved 64/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00063.parquet
+  saved 65/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00064.parquet
+  saved 66/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00065.parquet
+  saved 67/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00066.parquet
+  saved 68/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00067.parquet
+  saved 69/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00068.parquet
+  saved 70/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00069.parquet
+  saved 71/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00070.parquet
+  saved 72/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00071.parquet
+  saved 73/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00072.parquet
+  saved 74/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00073.parquet
+  saved 75/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00074.parquet
+  saved 76/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00075.parquet
+  saved 77/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00076.parquet
+  saved 78/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00077.parquet
+  saved 79/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00078.parquet
+  saved 80/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00079.parquet
+  saved 81/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00080.parquet
+  saved 82/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00081.parquet
+  saved 83/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00082.parquet
+  saved 84/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00083.parquet
+  saved 85/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00084.parquet
+  saved 86/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00085.parquet
+  saved 87/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00086.parquet
+  saved 88/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00087.parquet
+  saved 89/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00088.parquet
+  saved 90/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00089.parquet
+  saved 91/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00090.parquet
+  saved 92/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00091.parquet
+  saved 93/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00092.parquet
+  saved 94/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00093.parquet
+  saved 95/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00094.parquet
+  saved 96/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00095.parquet
+  saved 97/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00096.parquet
+  saved 98/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00097.parquet
+  saved 99/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00098.parquet
+  saved 100/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00099.parquet
+  saved 101/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00100.parquet
+  saved 102/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00101.parquet
+  saved 103/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00102.parquet
+  saved 104/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00103.parquet
+  saved 105/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00104.parquet
+  saved 106/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00105.parquet
+  saved 107/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00106.parquet
+  saved 108/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00107.parquet
+  saved 109/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00108.parquet
+  saved 110/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00109.parquet
+  saved 111/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00110.parquet
+  saved 112/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00111.parquet
+  saved 113/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00112.parquet
+  saved 114/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00113.parquet
+  saved 115/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00114.parquet
+  saved 116/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00115.parquet
+  saved 117/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00116.parquet
+  saved 118/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00117.parquet
+  saved 119/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00118.parquet
+  saved 120/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00119.parquet
+  saved 121/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00120.parquet
+  saved 122/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00121.parquet
+  saved 123/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00122.parquet
+  saved 124/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00123.parquet
+  saved 125/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00124.parquet
+  saved 126/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00125.parquet
+  saved 127/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00126.parquet
+  saved 128/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00127.parquet
+  saved 129/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00128.parquet
+  saved 130/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00129.parquet
+  saved 131/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00130.parquet
+  saved 132/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00131.parquet
+  saved 133/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00132.parquet
+  saved 134/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00133.parquet
+  saved 135/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00134.parquet
+  saved 136/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00135.parquet
+  saved 137/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00136.parquet
+  saved 138/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00137.parquet
+  saved 139/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00138.parquet
+  saved 140/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00139.parquet
+  saved 141/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00140.parquet
+  saved 142/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00141.parquet
+  saved 143/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00142.parquet
+  saved 144/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00143.parquet
+  saved 145/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00144.parquet
+  saved 146/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00145.parquet
+  saved 147/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00146.parquet
+  saved 148/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00147.parquet
+  saved 149/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00148.parquet
+  saved 150/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00149.parquet
+  saved 151/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00150.parquet
+  saved 152/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00151.parquet
+  saved 153/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00152.parquet
+  saved 154/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00153.parquet
+  saved 155/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00154.parquet
+  saved 156/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00155.parquet
+  saved 157/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00156.parquet
+  saved 158/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00157.parquet
+  saved 159/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00158.parquet
+  saved 160/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00159.parquet
+  saved 161/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00160.parquet
+  saved 162/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00161.parquet
+  saved 163/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00162.parquet
+  saved 164/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00163.parquet
+  saved 165/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00164.parquet
+  saved 166/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00165.parquet
+  saved 167/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00166.parquet
+  saved 168/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00167.parquet
+  saved 169/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00168.parquet
+  saved 170/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00169.parquet
+  saved 171/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00170.parquet
+  saved 172/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00171.parquet
+  saved 173/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00172.parquet
+  saved 174/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00173.parquet
+  saved 175/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00174.parquet
+  saved 176/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00175.parquet
+  saved 177/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00176.parquet
+  saved 178/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00177.parquet
+  saved 179/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00178.parquet
+  saved 180/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00179.parquet
+  saved 181/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00180.parquet
+  saved 182/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00181.parquet
+  saved 183/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00182.parquet
+  saved 184/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00183.parquet
+  saved 185/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00184.parquet
+  saved 186/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00185.parquet
+  saved 187/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00186.parquet
+  saved 188/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00187.parquet
+  saved 189/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00188.parquet
+  saved 190/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00189.parquet
+  saved 191/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00190.parquet
+  saved 192/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00191.parquet
+  saved 193/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00192.parquet
+  saved 194/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00193.parquet
+  saved 195/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00194.parquet
+  saved 196/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00195.parquet
+  saved 197/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00196.parquet
+  saved 198/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00197.parquet
+  saved 199/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00198.parquet
+  saved 200/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00199.parquet
+  saved 201/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00200.parquet
+  saved 202/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00201.parquet
+  saved 203/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00202.parquet
+  saved 204/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00203.parquet
+  saved 205/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00204.parquet
+  saved 206/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00205.parquet
+  saved 207/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00206.parquet
+  saved 208/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00207.parquet
+  saved 209/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00208.parquet
+  saved 210/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00209.parquet
+  saved 211/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00210.parquet
+  saved 212/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00211.parquet
+  saved 213/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00212.parquet
+  saved 214/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00213.parquet
+  saved 215/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00214.parquet
+  saved 216/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00215.parquet
+  saved 217/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00216.parquet
+  saved 218/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00217.parquet
+  saved 219/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00218.parquet
+  saved 220/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00219.parquet
+  saved 221/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00220.parquet
+  saved 222/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00221.parquet
+  saved 223/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00222.parquet
+  saved 224/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00223.parquet
+  saved 225/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00224.parquet
+  saved 226/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00225.parquet
+  saved 227/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00226.parquet
+  saved 228/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00227.parquet
+  saved 229/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00228.parquet
+  saved 230/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00229.parquet
+  saved 231/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00230.parquet
+  saved 232/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00231.parquet
+  saved 233/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00232.parquet
+  saved 234/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00233.parquet
+  saved 235/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00234.parquet
+  saved 236/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00235.parquet
+  saved 237/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00236.parquet
+  saved 238/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00237.parquet
+  saved 239/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00238.parquet
+  saved 240/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00239.parquet
+  saved 241/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00240.parquet
+  saved 242/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00241.parquet
+  saved 243/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00242.parquet
+  saved 244/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00243.parquet
+  saved 245/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00244.parquet
+  saved 246/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00245.parquet
+  saved 247/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00246.parquet
+  saved 248/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00247.parquet
+  saved 249/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00248.parquet
+  saved 250/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00249.parquet
+  saved 251/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00250.parquet
+  saved 252/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00251.parquet
+  saved 253/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00252.parquet
+  saved 254/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00253.parquet
+  saved 255/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00254.parquet
+  saved 256/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00255.parquet
+  saved 257/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00256.parquet
+  saved 258/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00257.parquet
+  saved 259/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00258.parquet
+  saved 260/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00259.parquet
+  saved 261/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00260.parquet
+  saved 262/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00261.parquet
+  saved 263/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00262.parquet
+  saved 264/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00263.parquet
+  saved 265/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00264.parquet
+  saved 266/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00265.parquet
+  saved 267/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00266.parquet
+  saved 268/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00267.parquet
+  saved 269/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00268.parquet
+  saved 270/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00269.parquet
+  saved 271/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00270.parquet
+  saved 272/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00271.parquet
+  saved 273/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00272.parquet
+  saved 274/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00273.parquet
+  saved 275/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00274.parquet
+  saved 276/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00275.parquet
+  saved 277/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00276.parquet
+  saved 278/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00277.parquet
+  saved 279/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00278.parquet
+  saved 280/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00279.parquet
+  saved 281/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00280.parquet
+  saved 282/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00281.parquet
+  saved 283/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00282.parquet
+  saved 284/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00283.parquet
+  saved 285/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00284.parquet
+  saved 286/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00285.parquet
+  saved 287/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00286.parquet
+  saved 288/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00287.parquet
+  saved 289/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00288.parquet
+  saved 290/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00289.parquet
+  saved 291/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00290.parquet
+  saved 292/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00291.parquet
+  saved 293/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00292.parquet
+  saved 294/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00293.parquet
+  saved 295/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00294.parquet
+  saved 296/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00295.parquet
+  saved 297/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00296.parquet
+  saved 298/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00297.parquet
+  saved 299/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00298.parquet
+  saved 300/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00299.parquet
+  saved 301/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00300.parquet
+  saved 302/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00301.parquet
+  saved 303/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00302.parquet
+  saved 304/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00303.parquet
+  saved 305/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00304.parquet
+  saved 306/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00305.parquet
+  saved 307/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00306.parquet
+  saved 308/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00307.parquet
+  saved 309/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00308.parquet
+  saved 310/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00309.parquet
+  saved 311/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00310.parquet
+  saved 312/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00311.parquet
+  saved 313/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00312.parquet
+  saved 314/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00313.parquet
+  saved 315/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00314.parquet
+  saved 316/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00315.parquet
+  saved 317/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00316.parquet
+  saved 318/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00317.parquet
+  saved 319/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00318.parquet
+  saved 320/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00319.parquet
+  saved 321/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00320.parquet
+  saved 322/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00321.parquet
+  saved 323/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00322.parquet
+  saved 324/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00323.parquet
+  saved 325/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00324.parquet
+  saved 326/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00325.parquet
+  saved 327/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00326.parquet
+  saved 328/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00327.parquet
+  saved 329/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00328.parquet
+  saved 330/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00329.parquet
+  saved 331/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00330.parquet
+  saved 332/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00331.parquet
+  saved 333/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00332.parquet
+  saved 334/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00333.parquet
+  saved 335/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00334.parquet
+  saved 336/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00335.parquet
+  saved 337/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00336.parquet
+  saved 338/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00337.parquet
+  saved 339/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00338.parquet
+  saved 340/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00339.parquet
+  saved 341/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00340.parquet
+  saved 342/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00341.parquet
+  saved 343/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00342.parquet
+  saved 344/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00343.parquet
+  saved 345/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00344.parquet
+  saved 346/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00345.parquet
+  saved 347/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00346.parquet
+  saved 348/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00347.parquet
+  saved 349/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00348.parquet
+  saved 350/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00349.parquet
+  saved 351/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00350.parquet
+  saved 352/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00351.parquet
+  saved 353/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00352.parquet
+  saved 354/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00353.parquet
+  saved 355/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00354.parquet
+  saved 356/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00355.parquet
+  saved 357/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00356.parquet
+  saved 358/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00357.parquet
+  saved 359/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00358.parquet
+  saved 360/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00359.parquet
+  saved 361/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00360.parquet
+  saved 362/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00361.parquet
+  saved 363/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00362.parquet
+  saved 364/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00363.parquet
+  saved 365/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00364.parquet
+  saved 366/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00365.parquet
+  saved 367/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00366.parquet
+  saved 368/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00367.parquet
+  saved 369/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00368.parquet
+  saved 370/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00369.parquet
+  saved 371/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00370.parquet
+  saved 372/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00371.parquet
+  saved 373/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00372.parquet
+  saved 374/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00373.parquet
+  saved 375/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00374.parquet
+  saved 376/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00375.parquet
+  saved 377/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00376.parquet
+  saved 378/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00377.parquet
+  saved 379/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00378.parquet
+  saved 380/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00379.parquet
+  saved 381/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00380.parquet
+  saved 382/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00381.parquet
+  saved 383/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00382.parquet
+  saved 384/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00383.parquet
+  saved 385/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00384.parquet
+  saved 386/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00385.parquet
+  saved 387/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00386.parquet
+  saved 388/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00387.parquet
+  saved 389/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00388.parquet
+  saved 390/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00389.parquet
+  saved 391/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00390.parquet
+  saved 392/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00391.parquet
+  saved 393/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00392.parquet
+  saved 394/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00393.parquet
+  saved 395/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00394.parquet
+  saved 396/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00395.parquet
+  saved 397/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00396.parquet
+  saved 398/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00397.parquet
+  saved 399/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00398.parquet
+  saved 400/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00399.parquet
+  saved 401/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00400.parquet
+  saved 402/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00401.parquet
+  saved 403/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00402.parquet
+  saved 404/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00403.parquet
+  saved 405/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00404.parquet
+  saved 406/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00405.parquet
+  saved 407/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00406.parquet
+  saved 408/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00407.parquet
+  saved 409/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00408.parquet
+  saved 410/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00409.parquet
+  saved 411/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00410.parquet
+  saved 412/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00411.parquet
+  saved 413/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00412.parquet
+  saved 414/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00413.parquet
+  saved 415/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00414.parquet
+  saved 416/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00415.parquet
+  saved 417/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00416.parquet
+  saved 418/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00417.parquet
+  saved 419/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00418.parquet
+  saved 420/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00419.parquet
+  saved 421/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00420.parquet
+  saved 422/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00421.parquet
+  saved 423/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00422.parquet
+  saved 424/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00423.parquet
+  saved 425/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00424.parquet
+  saved 426/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00425.parquet
+  saved 427/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00426.parquet
+  saved 428/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00427.parquet
+  saved 429/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00428.parquet
+  saved 430/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00429.parquet
+  saved 431/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00430.parquet
+  saved 432/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00431.parquet
+  saved 433/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00432.parquet
+  saved 434/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00433.parquet
+  saved 435/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00434.parquet
+  saved 436/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00435.parquet
+  saved 437/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00436.parquet
+  saved 438/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00437.parquet
+  saved 439/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00438.parquet
+  saved 440/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00439.parquet
+  saved 441/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00440.parquet
+  saved 442/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00441.parquet
+  saved 443/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00442.parquet
+  saved 444/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00443.parquet
+  saved 445/445 normalized -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/normalized_old/part-00444.parquet
+
+phase 2: load full normalized, split into 100 ZEST_KEY groups -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old
+  loaded 42,801,685 normalized rows
+  saved group 1/100 processed (23,563 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-000.parquet
+  saved group 2/100 processed (46,778 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-001.parquet
+  saved group 3/100 processed (70,128 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-002.parquet
+  saved group 4/100 processed (93,569 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-003.parquet
+  saved group 5/100 processed (116,845 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-004.parquet
+  saved group 6/100 processed (139,911 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-005.parquet
+  saved group 7/100 processed (162,977 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-006.parquet
+  saved group 8/100 processed (186,042 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-007.parquet
+  saved group 9/100 processed (209,698 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-008.parquet
+  saved group 10/100 processed (232,984 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-009.parquet
+  saved group 11/100 processed (256,144 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-010.parquet
+  saved group 12/100 processed (279,731 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-011.parquet
+  saved group 13/100 processed (302,892 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-012.parquet
+  saved group 14/100 processed (326,173 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-013.parquet
+  saved group 15/100 processed (349,500 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-014.parquet
+  saved group 16/100 processed (372,743 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-015.parquet
+  saved group 17/100 processed (396,166 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-016.parquet
+  saved group 18/100 processed (419,585 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-017.parquet
+  saved group 19/100 processed (442,559 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-018.parquet
+  saved group 20/100 processed (465,839 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-019.parquet
+  saved group 21/100 processed (489,020 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-020.parquet
+  saved group 22/100 processed (512,588 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-021.parquet
+  saved group 23/100 processed (535,773 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-022.parquet
+  saved group 24/100 processed (559,166 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-023.parquet
+  saved group 25/100 processed (582,592 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-024.parquet
+  saved group 26/100 processed (606,045 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-025.parquet
+  saved group 27/100 processed (629,544 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-026.parquet
+  saved group 28/100 processed (652,770 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-027.parquet
+  saved group 29/100 processed (676,246 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-028.parquet
+  saved group 30/100 processed (699,659 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-029.parquet
+  saved group 31/100 processed (722,908 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-030.parquet
+  saved group 32/100 processed (746,357 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-031.parquet
+  saved group 33/100 processed (769,728 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-032.parquet
+  saved group 34/100 processed (793,018 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-033.parquet
+  saved group 35/100 processed (816,192 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-034.parquet
+  saved group 36/100 processed (839,560 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-035.parquet
+  saved group 37/100 processed (862,980 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-036.parquet
+  saved group 38/100 processed (886,124 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-037.parquet
+  saved group 39/100 processed (909,239 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-038.parquet
+  saved group 40/100 processed (932,491 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-039.parquet
+  saved group 41/100 processed (955,863 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-040.parquet
+  saved group 42/100 processed (979,305 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-041.parquet
+  saved group 43/100 processed (1,002,606 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-042.parquet
+  saved group 44/100 processed (1,025,821 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-043.parquet
+  saved group 45/100 processed (1,049,079 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-044.parquet
+  saved group 46/100 processed (1,072,445 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-045.parquet
+  saved group 47/100 processed (1,095,764 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-046.parquet
+  saved group 48/100 processed (1,119,062 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-047.parquet
+  saved group 49/100 processed (1,142,492 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-048.parquet
+  saved group 50/100 processed (1,165,828 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-049.parquet
+  saved group 51/100 processed (1,189,133 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-050.parquet
+  saved group 52/100 processed (1,212,396 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-051.parquet
+  saved group 53/100 processed (1,236,001 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-052.parquet
+  saved group 54/100 processed (1,259,399 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-053.parquet
+  saved group 55/100 processed (1,282,548 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-054.parquet
+  saved group 56/100 processed (1,305,465 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-055.parquet
+  saved group 57/100 processed (1,328,619 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-056.parquet
+  saved group 58/100 processed (1,351,846 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-057.parquet
+  saved group 59/100 processed (1,375,080 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-058.parquet
+  saved group 60/100 processed (1,398,345 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-059.parquet
+  saved group 61/100 processed (1,421,757 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-060.parquet
+  saved group 62/100 processed (1,445,295 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-061.parquet
+  saved group 63/100 processed (1,468,429 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-062.parquet
+  saved group 64/100 processed (1,491,583 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-063.parquet
+  saved group 65/100 processed (1,515,142 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-064.parquet
+  saved group 66/100 processed (1,538,371 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-065.parquet
+  saved group 67/100 processed (1,561,595 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-066.parquet
+  saved group 68/100 processed (1,585,373 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-067.parquet
+  saved group 69/100 processed (1,608,777 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-068.parquet
+  saved group 70/100 processed (1,632,161 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-069.parquet
+  saved group 71/100 processed (1,655,519 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-070.parquet
+  saved group 72/100 processed (1,678,784 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-071.parquet
+  saved group 73/100 processed (1,702,359 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-072.parquet
+  saved group 74/100 processed (1,725,536 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-073.parquet
+  saved group 75/100 processed (1,748,805 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-074.parquet
+  saved group 76/100 processed (1,772,133 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-075.parquet
+  saved group 77/100 processed (1,795,538 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-076.parquet
+  saved group 78/100 processed (1,818,687 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-077.parquet
+  saved group 79/100 processed (1,841,863 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-078.parquet
+  saved group 80/100 processed (1,865,095 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-079.parquet
+  saved group 81/100 processed (1,888,385 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-080.parquet
+  saved group 82/100 processed (1,911,994 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-081.parquet
+  saved group 83/100 processed (1,935,287 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-082.parquet
+  saved group 84/100 processed (1,958,448 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-083.parquet
+  saved group 85/100 processed (1,981,692 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-084.parquet
+  saved group 86/100 processed (2,004,998 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-085.parquet
+  saved group 87/100 processed (2,028,288 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-086.parquet
+  saved group 88/100 processed (2,051,661 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-087.parquet
+  saved group 89/100 processed (2,074,788 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-088.parquet
+  saved group 90/100 processed (2,097,880 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-089.parquet
+  saved group 91/100 processed (2,121,459 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-090.parquet
+  saved group 92/100 processed (2,144,591 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-091.parquet
+  saved group 93/100 processed (2,167,740 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-092.parquet
+  saved group 94/100 processed (2,190,813 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-093.parquet
+  saved group 95/100 processed (2,214,182 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-094.parquet
+  saved group 96/100 processed (2,237,569 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-095.parquet
+  saved group 97/100 processed (2,260,879 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-096.parquet
+  saved group 98/100 processed (2,284,110 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-097.parquet
+  saved group 99/100 processed (2,307,336 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-098.parquet
+  saved group 100/100 processed (2,330,710 ZEST_KEYs so far) -> /home/jag/payment-processor-research/payment_processing_research_data/transunion/test/processed_old/part-099.parquet
+
+done: 445 normalized chunks, 100 processed groups, 2,330,710 ZEST_KEYs
