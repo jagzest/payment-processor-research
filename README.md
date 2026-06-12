@@ -53,12 +53,11 @@ All in [`payment_pattern_aggregator.py`](https://github.com/Katlean/feature-engi
 - We adjusted payment-processor (`PaymentPatternsAggregatorV2`) so that it
   reads `missing_data_chars` from the asset. See
   [here](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L62).
-  This is a required input, so every asset that uses
-  `PaymentPatternsAggregatorV2` must declare it. NOTE: an empty list is NOT
-  a safe disable in the current code — `_get_count([])` builds an empty
-  regex and `str.count('')` returns len+1, which would corrupt the
-  denominators. Assets without missing-data codes need a follow-up guard
-  (or just a real char list).
+  This is a REQUIRED input. We only declared it for the three assets we
+  changed — equifax/cms_6, experian/arf7 and transunion/TU4R — so any other
+  asset that uses `PaymentPatternsAggregatorV2` (authorized.json variants,
+  FE1→FE2 conversion assets, other bureau formats) must be updated with its
+  bureau's missing-data character before it can run on the new code.
 - We updated `_get_effective_month_range` so that it takes in
   `missing_data_chars` and a variable called `all_month_range`. If
   `all_month_range` is True it only excludes months where the missing data
