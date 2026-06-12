@@ -47,8 +47,11 @@ All in [`payment_pattern_aggregator.py`](https://github.com/Katlean/feature-engi
   reads `missing_data_chars` from the asset. See
   [here](https://github.com/Katlean/feature-engine-parts/blob/32ca05418d8f15682c6a80328097436d2a6db01b/feature_engine_parts/fe_parts_V2/preprocessors/payment_pattern_aggregator.py#L62).
   This is a required input, so every asset that uses
-  `PaymentPatternsAggregatorV2` must declare it (pass `[]` to disable the
-  exclusion).
+  `PaymentPatternsAggregatorV2` must declare it. NOTE: an empty list is NOT
+  a safe disable in the current code — `_get_count([])` builds an empty
+  regex and `str.count('')` returns len+1, which would corrupt the
+  denominators. Assets without missing-data codes need a follow-up guard
+  (or just a real char list).
 - We updated `_get_effective_month_range` so that it takes in
   `missing_data_chars` and a variable called `all_month_range`. If
   `all_month_range` is True it only excludes months where the missing data
@@ -180,8 +183,12 @@ never touched (verified: 0 changed rows).
    very close.
 
 8. **`Evaluate_Models_With_Change.ipynb`** — trained models on just the
-   1,143 percent features (`Build_Model_New_With_Change.ipynb`; same
-   applicants, same features, only the aggregator behavior differs).
+   1,143 percent features: every aggregated
+   `trade_<agg>_percent_of_DQ<n>_in_last_<m>_months__<group>` column — the
+   exact features whose denominator the fix recomputes — frozen to
+   `Features_To_Use.json` by `Features_to_use.ipynb` so NEW and OLD read the
+   identical list (`Build_Model_New_With_Change.ipynb`; same applicants,
+   same features, only the aggregator behavior differs).
    Results basically FLAT: AUC 0.7763 (with-change) vs 0.7763 (fix-only) vs
    0.7764 (old), the same on every slice, score Spearman 0.998.
 
