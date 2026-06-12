@@ -147,43 +147,56 @@ never touched (verified: 0 changed rows).
    position more recent. ~18% of experian tradelines carry a dash; for the
    affected ones, the corrected pattern's length matches the account's age
    at report (median gap 0.0 months) while the old pattern was short by
-   11.6+ months at the 75th percentile. Because this change was NOT in the
-   original processing, **`NewProcessing_Experian_{Train,Test}.ipynb`**
-   re-ran phase 1 + 2 for the same 400k experian samples with the branch
-   code (output: `new_normalized_and_processed/experian_<role>/`). The TU
-   asset was also fixed (its `/` placeholder removed), but that changes no
-   data — `/` never occurs in TU patterns, so old and new are bit-identical
-   (verified: 0 changed rows; this doubles as a control).
+   11.6+ months at the 75th percentile. The TU asset was also fixed (its
+   `/` placeholder removed), but that changes no data — `/` never occurs in
+   TU patterns, so old and new are bit-identical (verified: 0 changed rows;
+   this doubles as a control).
 
-5. **`PSI_Analysis.ipynb`** — feature-level look at everything that changed,
+5. **`NewProcessing_Experian_{Train,Test}.ipynb`** — because the placeholder
+   change was NOT in the original processing, these re-ran phase 1 + 2 for
+   the same 400k experian samples with the branch-installed model-engine +
+   feature-engine-parts (output:
+   `new_normalized_and_processed/experian_<role>/`, keyed).
+
+6. **`PSI_Analysis.ipynb`** — feature-level look at everything that changed,
    for both the **percent** and **number** families (number included because
    the placeholder change moves counts — and only for experian; eq/TU number
    features show 0 changed rows, as designed). Findings: PSI ≈ 0 overall on
-   every feature (worst 0.013 vs the 0.1 watch threshold). Per-feature
-   predictive power (`Predictive_Power_New_vs_Old.ipynb`): percent features
-   on average slightly POSITIVE (more improved than degraded, top family
-   +0.003–0.004 univariate AUC on 1.18M applicants); number features
-   slightly worse on average but basically 0 difference; restricted to the
-   experian applicants whose counts actually changed, the AUC deltas are
-   slightly positive but still very close.
+   every feature (worst 0.013 vs the 0.1 watch threshold) — but restricted
+   to only the applicants whose value actually changed, PSI is HIGH: the
+   changed values move to entirely different bins, meaning the corrections
+   are systematic shifts, not jitter. (The extreme changed-rows PSIs land on
+   niche `min_*` features in tiny populations, where PSI is unbounded — the
+   honest read is "big shift where it applies, invisible in the
+   population.")
 
-6. **`Evaluate_Models_With_Change.ipynb`** — trained models on just the
+7. **`Predictive_Power_New_vs_Old.ipynb`** — per-feature univariate AUC vs
+   the target, NEW vs OLD on the same applicants (one-column models, so no
+   masking from redundant features). Percent features on average slightly
+   POSITIVE (more improved than degraded, top family +0.003–0.004 univariate
+   AUC on 1.18M applicants); number features slightly worse on average but
+   basically 0 difference; restricted to the experian applicants whose
+   counts actually changed, the AUC deltas are slightly positive but still
+   very close.
+
+8. **`Evaluate_Models_With_Change.ipynb`** — trained models on just the
    1,143 percent features (`Build_Model_New_With_Change.ipynb`; same
    applicants, same features, only the aggregator behavior differs).
    Results basically FLAT: AUC 0.7763 (with-change) vs 0.7763 (fix-only) vs
    0.7764 (old), the same on every slice, score Spearman 0.998.
 
-7. **`Evaluate_Models_NumberPercentOpen.ipynb`** — same comparison on a
+9. **`Evaluate_Models_NumberPercentOpen.ipynb`** — same comparison on a
    288-feature subset of all-open-account **number + percent** features
    (`Build_Model_NumberPercentOpen_{New,Old}.ipynb`), so the model can see
    the count features the placeholder change moves. Again nothing dramatic:
    basically the same performance level for new and old on every slice.
-   **`Difference_Drivers_Train.ipynb`** completes the picture with a
-   multivariate two-sample test: a classifier given 100k rows/side can
-   barely tell NEW data from OLD (separation AUC 0.53–0.55); among only the
-   ~10% of applicants whose features changed it separates at 0.84–0.93 —
-   i.e. the corrections are a consistent directional shift where they apply,
-   and invisible everywhere else.
+
+10. **`Difference_Drivers_Train.ipynb`** — multivariate two-sample test: a
+    classifier given 100k rows/side can barely tell NEW data from OLD
+    (separation AUC 0.53–0.55); among only the ~10% of applicants whose
+    features changed it separates at 0.84–0.93 — i.e. the corrections are a
+    consistent directional shift where they apply, and invisible everywhere
+    else.
 
 ## Other analysis
 
