@@ -38,6 +38,13 @@ removed the `placeholder`:
 - placeholder removed for transunion — the TU pattern character set
   (`1-5, E, X, J, K, H, G, L, Y`; Appendix C, pp. 838-840) contains no `/`;
   it was copied from the equifax asset and never occurs in TU data
+- note: equifax is the only bureau with a TRUE placeholder — "A slash (/)
+  between positions separates each 12 month segment from the next" (STS
+  TotalView Programming Guide, p. 3-29) — pure formatting, not a month, so
+  stripping it is correct there. There is NO corresponding equivalent for
+  experian or TU: experian's `-` was being used as the placeholder when it
+  just represents missing data (a real "No update received" month), and
+  TU's `/` doesn't exist at all
 
 ### feature-engine-parts changes
 
