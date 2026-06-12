@@ -3,8 +3,8 @@
 Research project on the `PaymentPatternsAggregatorV2` trended-feature
 denominator: the `percent_<rate>_<window>_months` features divide by months
 that were never observed, biasing the rates toward 0. While testing the fix
-we also found that Experian's `placeholder: "-"` was deleting real months
-from the payment pattern.
+we **also found that Experian's `placeholder: "-"` was deleting real months
+from the payment pattern**.
 
 The changes are committed on the **`payment_processor_change`** branch of
 both repos:
