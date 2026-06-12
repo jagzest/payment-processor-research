@@ -213,4 +213,6 @@ never touched (verified: 0 changed rows).
   every month window, per bureau, and writes the summary tables
   (`% of rows changed`, avg old/new effective months, percentiles for the
   changed rows) to
-  `payment_processing_research_data/analysis/denominator_analysis_<split>.xlsx`.
+  `payment_processing_research_data/analysis/denominator_analysis_<split>.xlsx`. The output is [here](https://docs.google.com/spreadsheets/d/1hkMo5THn72URsVmJPjzieRzgwEQMbvvr/edit?gid=874096676#gid=874096676)
+
+  
