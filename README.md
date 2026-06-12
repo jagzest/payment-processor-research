@@ -112,16 +112,12 @@ never touched (verified: 0 changed rows).
 
 ## Known gaps / follow-ups
 
-- `payment_history_length` REALLY changes for Experian/TU (measured in
-  `RealDataExample.ipynb`): the old code subtracted trailing `*` for every
-  bureau, and 0.00% of TU/experian patterns end in `*` — so the subtraction
-  never fired for them. With the bureau chars it does: 5.45% of TU
-  tradelines end in `X` (median 3 months removed, mean 10.4) and 2.28% of
-  experian end in `-` (median 11, mean 16). The new values are the correct
-  tenure semantics (trailing "no update" runs are unreported months, same as
-  equifax's `*`). No effect on our models — `payment_history_length` is not
-  aggregated into the processed trade features (0 of 8,848 columns) — but
-  any pipeline that consumes it directly will see the new values.
+- Because we no longer subtract trailing `*` for every bureau and instead
+  use each bureau's missing-data character, `payment_history_length` changes
+  for experian and TU (5.45% of TU tradelines, 2.28% of experian — measured
+  in `RealDataExample.ipynb`). This is the correct behavior, and it is NOT
+  used in any downstream processed feature (0 of 8,848 columns) — only
+  pipelines that read `payment_history_length` directly would notice.
 - `missing_data_chars` is a required constructor param — other assets that
   use `PaymentPatternsAggregatorV2` (authorized.json, FE1→FE2 conversion
   variants) must declare it or the param needs a default.
@@ -137,7 +133,7 @@ never touched (verified: 0 changed rows).
    Saves raw chunks to `payment_processing_research_data/<bureau>/<split>/unmapped/`.
 
 2. **`Notebooks_Where_We_Mapped_Data/`** — the full FE2 runs producing the
-   NEW (fixed denominator) and OLD (shipping behavior) data, **without the
+   NEW (fixed denominator) and OLD (current model-engine) data, **without the
    placeholder change** — Experian dashes were still being stripped. Phase 1
    (`normalized_*`) came out correct and keyed, but phase 2 saved its
    processed output with `index=False` after a ZEST_KEY groupby — **we lost
@@ -156,7 +152,10 @@ never touched (verified: 0 changed rows).
    position more recent. ~18% of experian tradelines carry a dash; for the
    affected ones, the corrected pattern's length matches the account's age
    at report (median gap 0.0 months) while the old pattern was short by
-   11.6+ months at the 75th percentile. The TU asset was also fixed (its
+   11.6+ months at the 75th percentile. As shown at the end of the notebook,
+   keeping the dashes makes the payment-pattern string's length much more
+   closely match the tradeline's actual history — the length now lines up
+   with the months between the open date and the report date. The TU asset was also fixed (its
    `/` placeholder removed), but that changes no data — `/` never occurs in
    TU patterns, so old and new are bit-identical (verified: 0 changed rows;
    this doubles as a control).
@@ -172,12 +171,7 @@ never touched (verified: 0 changed rows).
    the placeholder change moves counts — and only for experian; eq/TU number
    features show 0 changed rows, as designed). Findings: PSI ≈ 0 overall on
    every feature (worst 0.013 vs the 0.1 watch threshold) — but restricted
-   to only the applicants whose value actually changed, PSI is HIGH: the
-   changed values move to entirely different bins, meaning the corrections
-   are systematic shifts, not jitter. (The extreme changed-rows PSIs land on
-   niche `min_*` features in tiny populations, where PSI is unbounded — the
-   honest read is "big shift where it applies, invisible in the
-   population.")
+   to only the applicants whose value actually changed, PSI was high.
 
 7. **`Predictive_Power_New_vs_Old.ipynb`** — per-feature univariate AUC vs
    the target, NEW vs OLD on the same applicants (one-column models, so no
